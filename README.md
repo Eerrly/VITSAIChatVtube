@@ -11,3 +11,5 @@
 + [Pip下载地址](https://pypi.python.org/pypi/pip#downloads) 使用 `python setup.py install` 进行安装， 下载依赖库 `pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 清华大学镜像
 ## Model模型
 + `G_953000.pth` 请去 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai) 下载，放到model文件夹下
+## 用法
++ `python main.py` 如果找不到`monotonic_align`错误，请先把模型放到model文件夹下
