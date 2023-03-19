@@ -16,3 +16,6 @@
 + `python main.py`
 ## 错误解决方法
 + 如果直接跑会报错`No module named 'monotonic_align.core'`。[按照官方的说法]（https://github.com/jaywalnut310/vits），需要先在命令行 `cd` 到 `monotonic_align` 文件夹，然后开始编译，也就是在命令行中输入 `python setup.py build_ext --inplace`
+
+## TODO:
++ **接入Live2D用于人物展示**
