@@ -14,7 +14,7 @@ from text import text_to_sequence
 import commons
 
 chatGPTUri = "https://api.openai.com/v1/completions"
-chatGPTKey = "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"
+chatGPTKey = ""
 chatGPTModel = "text-davinci-003"
 chatGPTMaxTokens = 512
 chatGPTTemperature = 0.5
@@ -45,7 +45,9 @@ def play_audio(audio_file_name):
     subprocess.run(command, shell=True)
 
 def init_vits_model():
-    global hps_ms, device, net_g_ms
+    global hps_ms, device, net_g_ms, chatGPTKey
+
+    chatGPTKey = open("key.txt").read().strip("\n")
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--device', type=str, default='cpu')

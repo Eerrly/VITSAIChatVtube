@@ -3,9 +3,11 @@
 + **仅个人学习**
 + **基于 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai)**
 + **使用VITS语音合成，使用ChatGPT作为AI，使用Live2d作为展示**
++ **只支持Windows平台**
 - - -
 ## python环境
 + [Anaconda](https://www.anaconda.com/) 作为python环境
 + [Python官方地址](https://www.python.org/) 3.9.13
-+ [Pip下载地址](https://pypi.python.org/pypi/pip#downloads) 使用 `python setup.py install` 进行安装
-+ 下载依赖库 `pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 清华大学镜像
++ [Pip下载地址](https://pypi.python.org/pypi/pip#downloads) 使用 `python setup.py install` 进行安装， 下载依赖库 `pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 清华大学镜像
+## Model模型
++ `G_953000.pth` 请去 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai) 下载，放到model文件夹下
