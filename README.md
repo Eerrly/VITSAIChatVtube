@@ -23,20 +23,20 @@
   
   - 通过模型进行语音合成
   - 文字转语音
-</<details>
+</details>
   
 <details>
 <summary>✔️ChatGPT</summary>
   
   - 通过request方式请求chatGPT
   - 获取回复
-</<details>
+</details>
   
 <details>
 <summary>✔️播放语音</summary>
   
   - 通过mpv.exe进行播放
-</<details>
+</details>
   
 <details>
 <summary>❌Live2D接入</summary>
