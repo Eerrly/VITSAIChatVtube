@@ -2,8 +2,9 @@
 ## 说明：
 + **仅个人学习**
 + **基于 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai)**
-+ **使用VITS语音合成，使用ChatGPT作为AI，使用Live2d作为展示**
 + **只支持Windows平台**
+## 介绍：
+***使用VITS语音合成，使用ChatGPT作为AI，使用Live2d作为展示***
 - - -
 ## python环境
 + [Anaconda](https://www.anaconda.com/) 作为python环境
