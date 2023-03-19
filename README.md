@@ -21,6 +21,7 @@
 ## TODO:
 <details>
 <summary>Live2D接入</summary>
+  
   - API调用展示动作
   - 字幕
 </details>
