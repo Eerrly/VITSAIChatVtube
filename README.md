@@ -1,6 +1,5 @@
 # VITSAIChatVtube
 ## 说明：
-+ **仅个人学习**
 + **基于 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai)**
 + **只支持Windows平台**
 ## 介绍：
