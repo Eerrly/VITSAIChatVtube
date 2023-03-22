@@ -37,3 +37,6 @@
   
   - 通过mpv.exe进行播放
 </details>
+
+## TODO
++ 使用 `Socket` 或者 `UDP` 来和 [ERIUnityChatLive2D项目](https://github.com/Eerrly/ERIUnityChatLive2D) 进行通信交互
