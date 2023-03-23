@@ -10,7 +10,7 @@
 + [Python官方地址](https://www.python.org/) 3.9.13
 + [Pip下载地址](https://pypi.python.org/pypi/pip#downloads) 使用 `python setup.py install` 进行安装， 下载依赖库 `pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 清华大学镜像
 ## Model模型
-+ `G_953000.pth` 请去 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai) 下载，放到model文件夹下
++ `model/G_953000.pth` 请去 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai) 下载，放到model文件夹下
 ## 用法
 + 将openai key写在根目录下的key.txt里，没有自己创建
 + `python main.py`
