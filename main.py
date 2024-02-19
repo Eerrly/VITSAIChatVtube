@@ -83,8 +83,8 @@ def vits(text, language, speaker_id, noise_scale, noise_scale_w, length_scale):
     if not len(text):
         return "输入文本不能为空！", None, None
     text = text.replace('\n', ' ').replace('\r', '').replace(" ", "")
-    if len(text) > 200 and limitation:
-        return f"输入文字过长！{len(text)}>100", None, None
+    if len(text) > 200:
+        return f"输入文字过长！{len(text)}>200", None, None
     if language == 0:
         text = f"[ZH]{text}[ZH]"
     elif language == 1:
