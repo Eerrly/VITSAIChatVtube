@@ -15,6 +15,7 @@
 ## 用法
 + 将openai key写在根目录下的key.txt里，没有自己创建
 + `python main.py`
++ 构建exe程序 `pyinstaller -F -w -i icon.ico main.py --add-data mpv.exe:. --add-data model:model --add-data venv/Lib/site-packages/jamo:jamo`
 ## 错误解决方法
 + 如果直接跑会报错`No module named 'monotonic_align.core'`。[按照官方的说法]（https://github.com/jaywalnut310/vits），需要先在命令行 `cd` 到 `monotonic_align` 文件夹，然后开始编译，也就是在命令行中输入 `python setup.py build_ext --inplace`
 ## 功能:
