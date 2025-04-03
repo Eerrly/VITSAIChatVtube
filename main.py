@@ -1,10 +1,7 @@
 import time
-import os
 from scipy.io import wavfile
 import asyncio
 import subprocess
-import requests
-import json
 import argparse
 import torch
 from torch import no_grad, LongTensor
@@ -12,10 +9,11 @@ import utils
 from models import SynthesizerTrn
 from text import text_to_sequence
 import commons
+from openai import OpenAI
 
-chatGPTUri = "https://api.openai.com/v1/completions"
+chatGPTUri = "https://api.hunyuan.cloud.tencent.com/v1/chat/completions"
 chatGPTKey = ""
-chatGPTModel = "text-davinci-003"
+chatGPTModel = "hunyuan-role"
 chatGPTMaxTokens = 512
 chatGPTTemperature = 0.5
 chatGPTInitPrompt = "请扮演一个AI虚拟主播。不要强调你是AI虚拟主播，不要答非所问，不要有重复的语句，回答精简一点。这是观众的提问："
@@ -31,18 +29,34 @@ hps_ms = None
 device = None
 net_g_ms = None
 
+client = OpenAI(
+    api_key="sk-lYNX4J4bInIqKg44gHaBYKhgM71cpUcsH6KG5SMhs21VQlXm",  # 混元 APIKey
+    base_url="https://api.hunyuan.cloud.tencent.com/v1",  # 混元 endpoint
+)
+
 async def send_chatgpt_request(send_msg):
-    data = json.dumps({ "model": f"{chatGPTModel}", "prompt": f"{chatGPTInitPrompt}{send_msg}", "max_tokens": chatGPTMaxTokens, "temperature": chatGPTTemperature})
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {chatGPTKey}"}
-    response = requests.post(chatGPTUri, data=data, headers=headers, proxies=_proxies)
-    output = response.json()
-    result = output["choices"][0]["text"].strip("\n")
-    print("[AI回复] : ", result)
+    start = time.perf_counter()
+    completion = client.chat.completions.create(
+        model="hunyuan-role",
+        messages=[
+            {
+                "role": "user",
+                "content": f"{chatGPTInitPrompt}{send_msg}"
+            }
+        ],
+        extra_body={
+            "enable_enhancement": True,  # <- 自定义参数
+        },
+    )
+    result = completion.choices[0].message.content
+    print("请求成功!", f"AI回复: {result}", f"请求耗时: {round(time.perf_counter() - start, 2)} s")
     return result
+
 
 def play_audio(audio_file_name):
     command = f'mpv.exe -vo null {audio_file_name}'
     subprocess.run(command, shell=True)
+
 
 def init_vits_model():
     global hps_ms, device, net_g_ms, chatGPTKey
@@ -56,7 +70,7 @@ def init_vits_model():
     parser.add_argument("--colab", action="store_true", default=False, help="share gradio app")
     args = parser.parse_args()
     device = torch.device(args.device)
-    
+
     hps_ms = utils.get_hparams_from_file(r'./model/config.json')
     net_g_ms = SynthesizerTrn(
         len(hps_ms.symbols),
@@ -69,12 +83,14 @@ def init_vits_model():
     model, optimizer, learning_rate, epochs = utils.load_checkpoint(r'./model/G_953000.pth', net_g_ms, None)
     _init_vits_model = True
 
+
 def get_text(text, hps):
     text_norm, clean_text = text_to_sequence(text, hps.symbols, hps.data.text_cleaners)
     if hps.data.add_blank:
         text_norm = commons.intersperse(text_norm, 0)
     text_norm = LongTensor(text_norm)
     return text_norm, clean_text
+
 
 def vits(text, language, speaker_id, noise_scale, noise_scale_w, length_scale):
     global over
@@ -99,7 +115,8 @@ def vits(text, language, speaker_id, noise_scale, noise_scale_w, length_scale):
         audio = net_g_ms.infer(x_tst, x_tst_lengths, sid=speaker_id, noise_scale=noise_scale, noise_scale_w=noise_scale_w,
                                length_scale=length_scale)[0][0, 0].data.cpu().float().numpy()
 
-    return "生成成功!", (22050, audio), f"生成耗时 {round(time.perf_counter()-start, 2)} s"
+    return "生成成功!", (22050, audio), f"生成耗时 {round(time.perf_counter() - start, 2)} s"
+
 
 async def start():
     while True:
@@ -113,12 +130,11 @@ async def start():
         wavfile.write("output.wav", audios[0], audios[1])
         play_audio("output.wav")
 
+
 async def main():
     if not _init_vits_model:
         init_vits_model()
-    await asyncio.gather(start(),)
+    await asyncio.gather(start(), )
+
 
 asyncio.run(main())
-    
-    
-
