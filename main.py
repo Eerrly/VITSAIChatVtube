@@ -42,7 +42,6 @@ vitsNoiseScale = 0.6
 vitsNoiseScaleW = 0.668
 vitsLengthScale = 1.2
 
-_proxies = {'http': "http://127.0.0.1:7890", 'https': "http://127.0.0.1:7890"}
 _init_vits_model = False
 
 hps_ms = None
@@ -223,7 +222,9 @@ class AsyncTkinterApp:
         Thread(target=run_loop, daemon=True).start()
 
     def run_async_task(self, coroutine):
-        # 立即更新UI状态
+        """
+        运行异步任务并处理UI更新
+        """
         self.update_ui_state(
             btn_state="disabled",
             status_text="正在思考...",
