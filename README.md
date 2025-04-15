@@ -3,7 +3,9 @@
 + **基于 [VITS语音在线合成](https://huggingface.co/spaces/sayashi/vits-uma-genshin-honkai)**
 + **只支持Windows平台**
 ## 介绍：
-***使用VITS语音合成，使用ChatGPT作为AI***
+***使用VITS语音合成，使用腾讯混元OpenAI作为AI***
+
+[腾讯混元文档](https://cloud.tencent.com/document/product/1729/)
 - - -
 ## python环境
 + [Anaconda](https://www.anaconda.com/) 作为python环境
